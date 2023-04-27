@@ -1,7 +1,7 @@
 import UserInput from "./UserInput.jsx";
 import UserList from "./UserList.jsx";
 import {useMediaQuery, Grid, List, ListItem} from '@material-ui/core';
-import CustomCard from "./Components/CustomCard.jsx";
+import CustomCard from "./UI/CustomCard.jsx";
 
 function App() {
     const isDesktop = useMediaQuery('(min-width:600px)');

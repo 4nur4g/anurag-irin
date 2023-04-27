@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import TextField from "./UI/TextField.jsx";
+import Button from "./UI/Button.jsx"
 
 function UserInput() {
     const [name, setName] = useState("");
@@ -28,19 +29,20 @@ function UserInput() {
     return (
         <form onSubmit={handleSubmit}>
             <TextField
-                label="Name"
+                // label="Name"
                 value={name}
                 onChange={handleNameChange}
                 fullWidth
                 margin="normal"
             />
             <TextField
-                label="Email"
+                // label="Email"
                 type="email"
                 value={email}
                 onChange={handleEmailChange}
                 fullWidth
                 margin="normal"
+
             />
             <Button type="submit" variant="contained" color="primary">
                 Submit
