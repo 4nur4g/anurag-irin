@@ -38,6 +38,22 @@ function App() {
     console.log(formDataList);
   }, [formDataList]); // only run when formDataList changes
 
+  const handleEdit = (id) => {};
+
+  const handleDelete = (id) => {
+    console.log("inside handledelete", id);
+    // Loop through the list
+    for (let i = 0; i < formDataList.length; i++) {
+      // Check if the current object has the same id as the given id
+      if (formDataList[i].id === id) {
+        // Delete the object from the list using splice method
+        formDataList.splice(i, 1);
+        // Break the loop
+        break;
+      }
+    }
+  };
+
   return (
     <>
       {isDesktop ? (
@@ -48,8 +64,8 @@ function App() {
             </CustomCard>
           </Grid>
           <Grid item className={classes.untilmenu}>
-            <CustomCard>
-              <UserList userData={formDataList} />
+            <CustomCard minHeight={310} minWidth={439}>
+              <UserList userData={formDataList} handleDelete={handleDelete} />
             </CustomCard>
           </Grid>
         </Grid>

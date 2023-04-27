@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useEffect, useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,13 +26,17 @@ const dummyUsers = [
 const UserList = (props) => {
   const classes = useStyles();
 
-  const users = dummyUsers;
+  const [users, setUsers] = useState([]);
 
-  const userData = props.userData;
+  useEffect(() => {
+    setUsers(props.userData);
+  });
 
-  //   let userData = props.UserList;
-
-  console.log(props.userData, "😂");
+  const selected = (e) => {
+    console.log("selected", e);
+    props.handleDelete(e);
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== e.id)); // filter out the deleted user
+  };
 
   return (
     <div className={classes.root}>
@@ -49,10 +54,13 @@ const UserList = (props) => {
               }
               primaryTypographyProps={{ noWrap: true }}
             />
-            <IconButton aria-label="edit">
+            <IconButton
+              aria-label="edit"
+              onClick={(props) => props.handleEdit(user.id)}
+            >
               <EditIcon />
             </IconButton>
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" onClick={() => selected(user.id)}>
               <DeleteIcon />
             </IconButton>
           </ListItem>

@@ -44,12 +44,12 @@ function UserInput(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // do something with name and email
-    const data = { Name: name, Email: email, id: generateId() };
+    const data = { name: name, email: email, id: generateId() };
 
     props.onFormSubmit(data);
 
-    console.log("Name: ", name);
-    console.log("Email: ", email);
+    console.log("name: ", name);
+    console.log("email: ", email);
   };
 
   const handleClear = () => {
