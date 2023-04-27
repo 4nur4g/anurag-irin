@@ -1,6 +1,21 @@
-import { useState } from "react";
+import {useState} from "react";
 import TextField from "./UI/TextField.jsx";
 import Button from "./UI/Button.jsx"
+import {makeStyles} from "@material-ui/core/styles";
+import {Box, Typography} from "@mui/material";
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 514
+    }, fields: {
+        display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContents: 'center'
+    }, button1: {
+        marginLeft: "24px"
+    }, button2: {
+        marginLeft: "33px"
+    }
+}));
 
 function UserInput() {
     const [name, setName] = useState("");
@@ -26,15 +41,20 @@ function UserInput() {
         setEmail("");
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
+    const classes = useStyles();
+
+    return (<form onSubmit={handleSubmit} className={classes.root}>
+        <Box className={classes.fields}>
+            <Typography sx={{mr: 2, display: 'inline-block', width: '119px'}}>Test</Typography>
             <TextField
-                // label="Name"
                 value={name}
                 onChange={handleNameChange}
                 fullWidth
                 margin="normal"
             />
+        </Box>
+        <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <Typography sx={{mr: 2, display: 'inline-block', width: '119px'}}>Email</Typography>
             <TextField
                 // label="Email"
                 type="email"
@@ -44,14 +64,18 @@ function UserInput() {
                 margin="normal"
 
             />
-            <Button type="submit" variant="contained" color="primary">
+        </Box>
+        <Box sx={{marginTop: "103.88px"}}>
+            <Button type="submit" variant="contained" color="primary" style={{marginLeft: 24}}>
                 Submit
             </Button>
-            <Button type="button" variant="contained" color="secondary" onClick={handleClear}>
+            <Button type="button" variant="contained" color="secondary" onClick={handleClear}
+                    style={{marginLeft: 33}}
+            >
                 Clear
             </Button>
-        </form>
-    );
+        </Box>
+    </form>);
 }
 
 export default UserInput;

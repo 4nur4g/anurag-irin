@@ -22,7 +22,6 @@ function TextField(props) {
     return (
         <TextFieldMui className={classes.root} {...props}  InputProps={{
             disableUnderline: true,
-            disableLabel: true,
         }} InputLabelProps={{ shrink: false }}/>
     );
 }

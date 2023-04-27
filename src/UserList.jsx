@@ -9,7 +9,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
 }));
@@ -27,7 +26,7 @@ const UserList = ({ users = dummyUsers }) => {
 
     return (
         <div className={classes.root}>
-            <List>
+            <List style={{ width: '100%' }}>
                 {users.map((user) => (
 
                     <ListItem key={user.id}>
@@ -35,7 +34,7 @@ const UserList = ({ users = dummyUsers }) => {
                             primary={
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <span style={{ marginRight: '0.5rem' }}>{user.name}</span>
-                                    <span style={{ color: '#999' }}>{user.email}</span>
+                                    <span style={{ color: '#999', marginRight: '3.5rem' }}>{user.email}</span>
                                 </div>
                             }
                             primaryTypographyProps={{ noWrap: true }}
