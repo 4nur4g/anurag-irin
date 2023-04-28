@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import Button from "./UI/Button.jsx"
+import Card from '@mui/material/Card';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +55,10 @@ const UserList = (props) => {
 
   return (
       <div className={classes.root}>
+
         <List style={{ width: "100%" }}>
           {itemsToShow.map((user) => (
+              <Card sx={{ marginBottom: "14px", borderRadius: "20px", boxShadow: "0px 0px 20px rgba(116, 188, 82, 0.28)" }} key={user.id}>
               <ListItem key={user.id}>
                 <ListItemText
                     primary={
@@ -78,8 +81,10 @@ const UserList = (props) => {
                   <DeleteIcon />
                 </IconButton>
               </ListItem>
+            </Card>
           ))}
         </List>
+
         {users.length > numberOfItemsToShow ? (
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button variant="contained" color="primary" onClick={showMore}>

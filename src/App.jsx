@@ -4,6 +4,8 @@ import {useMediaQuery, Grid, List, ListItem} from "@material-ui/core";
 import CustomCard from "./UI/CustomCard.jsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {useEffect, useState} from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+
+    function Notify(text) {
+        toast(text, { autoClose: 2000 });
+    }
+
     const isDesktop = useMediaQuery("(min-width:600px)");
     const classes = useStyles();
 
@@ -33,10 +40,13 @@ function App() {
 
     function handleFormSubmit(data) {
         if (!fromSelected) {
+            Notify("User details have been saved")
             setFormDataList([...formDataList, data])
+
         }
 
         if (fromSelected) {
+            Notify("User details have been updated")
             formEdit(data)
             setFromSelected(false)
         }
@@ -79,6 +89,7 @@ function App() {
 
     return (
         <>
+            <ToastContainer/>
             {isDesktop ? (
                 <Grid container spacing={5} className={classes.root}>
                     <Grid item className={classes.untilmenu}>

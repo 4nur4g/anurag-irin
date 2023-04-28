@@ -1,12 +1,10 @@
-import { Card, CardContent } from '@material-ui/core';
+import Card from '@mui/material/Card';
 
 // eslint-disable-next-line react/prop-types
 const CardList = ({ children }) => {
     return (
-        <Card variant="outlined" style={{ padding: 25, borderRadius: 20 }}>
-            <CardContent>
+        <Card variant="outlined" sx={{ padding: 25, borderRadius: 20, boxShadow: "0px 0px 20px rgba(116, 188, 82, 0.2)" }}>
                 {children}
-            </CardContent>
         </Card>
     );
 };
