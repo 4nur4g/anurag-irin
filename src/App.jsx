@@ -109,12 +109,14 @@ function App() {
                 <List>
                     <ListItem>
                         <CustomCard>
-                            <UserInput onFormSubmit={handleFormSubmit} selectedEdit={selectedEdit}/>
+                            <UserInput onFormSubmit={handleFormSubmit} selectedEdit={selectedEdit}
+                                       fromSelected={fromSelected}/>
                         </CustomCard>
                     </ListItem>
                     <ListItem>
-                        <CustomCard>
-                            <UserList userData={formDataList} setSelectedEdit={setSelectedEdit}/>
+                        <CustomCard minHeight={310} minWidth={439}>
+                            <UserList userData={formDataList} handleDelete={handleDelete}
+                                      setSelectedEdit={setSelectedEdit} setFromSelected={setFromSelected}/>
                         </CustomCard>
                     </ListItem>
                 </List>
