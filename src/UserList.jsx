@@ -32,11 +32,15 @@ const UserList = (props) => {
     setUsers(props.userData);
   });
 
-  const selected = (e) => {
+  const selectedDelete = (e) => {
     console.log("selected", e);
-    props.handleDelete(e);
+    props.handleDelete(e.id);
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== e.id)); // filter out the deleted user
   };
+
+  const selectedEdit = (e) =>{
+    props.setSelectedEdit(e)
+  }
 
   return (
     <div className={classes.root}>
@@ -56,11 +60,11 @@ const UserList = (props) => {
             />
             <IconButton
               aria-label="edit"
-              onClick={(props) => props.handleEdit(user.id)}
+              onClick={() => selectedEdit(user)}
             >
               <EditIcon />
             </IconButton>
-            <IconButton aria-label="delete" onClick={() => selected(user.id)}>
+            <IconButton aria-label="delete" onClick={() => selectedDelete(user)}>
               <DeleteIcon />
             </IconButton>
           </ListItem>

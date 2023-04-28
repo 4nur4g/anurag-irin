@@ -28,6 +28,7 @@ function App() {
   const classes = useStyles();
 
   const [formDataList, setFormDataList] = useState([]);
+  const [selectedEdit,setSelectedEdit] = useState(null)
 
   function handleFormSubmit(data) {
     setFormDataList([...formDataList, data]);
@@ -38,7 +39,21 @@ function App() {
     console.log(formDataList);
   }, [formDataList]); // only run when formDataList changes
 
-  const handleEdit = (id) => {};
+
+  function formEdit(obj) {
+    // Make a copy of the list
+    var newList = [...formDataList];
+    // Loop through the copy
+    for (var i = 0; i < newList.length; i++) {
+      // If the id matches, replace the object and break the loop
+      if (newList[i].id === obj.id) {
+        newList[i] = obj;
+        break;
+      }
+    }
+    // Set the list to the modified copy using the setting function
+    setFormDataList(newList);
+  }
 
   const handleDelete = (id) => {
     console.log("inside handledelete", id);
@@ -60,12 +75,12 @@ function App() {
         <Grid container spacing={5} className={classes.root}>
           <Grid item className={classes.untilmenu}>
             <CustomCard>
-              <UserInput onFormSubmit={handleFormSubmit} />
+              <UserInput onFormSubmit={handleFormSubmit} selectedEdit = {selectedEdit}/>
             </CustomCard>
           </Grid>
           <Grid item className={classes.untilmenu}>
             <CustomCard minHeight={310} minWidth={439}>
-              <UserList userData={formDataList} handleDelete={handleDelete} />
+              <UserList userData={formDataList} handleDelete={handleDelete} setSelectedEdit={setSelectedEdit}/>
             </CustomCard>
           </Grid>
         </Grid>
@@ -73,12 +88,12 @@ function App() {
         <List>
           <ListItem>
             <CustomCard>
-              <UserInput onFormSubmit={handleFormSubmit} />
+              <UserInput onFormSubmit={handleFormSubmit} selectedEdit = {selectedEdit} />
             </CustomCard>
           </ListItem>
           <ListItem>
             <CustomCard>
-              <UserList userData={formDataList} />
+              <UserList userData={formDataList} setSelectedEdit={setSelectedEdit} />
             </CustomCard>
           </ListItem>
         </List>

@@ -1,111 +1,118 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import TextField from "./UI/TextField.jsx";
 import Button from "./UI/Button.jsx";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography } from "@mui/material";
+import {makeStyles} from "@material-ui/core/styles";
+import {Box, Typography} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 514,
-  },
-  fields: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContents: "center",
-  },
-  button1: {
-    marginLeft: "24px",
-  },
-  button2: {
-    marginLeft: "33px",
-  },
+    root: {
+        maxWidth: 514,
+    },
+    fields: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContents: "center",
+    },
+    button1: {
+        marginLeft: "24px",
+    },
+    button2: {
+        marginLeft: "33px",
+    },
 }));
 
 function UserInput(props) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+    useEffect(() => {
+        if (props.selectedEdit) {
+            setName(props.selectedEdit.name)
+            setEmail(props.selectedEdit.email)
+        }
+    },[props.selectedEdit])
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    };
 
-  // Define a function to generate a random id
-  const generateId = () => {
-    // Use Math.random and Math.floor to get a random number between 1 and 1000
-    return Math.floor(Math.random() * 1000) + 1;
-  };
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // do something with name and email
-    const data = { name: name, email: email, id: generateId() };
+    // Define a function to generate a random id
+    const generateId = () => {
+        // Use Math.random and Math.floor to get a random number between 1 and 1000
+        return Math.floor(Math.random() * 1000) + 1;
+    };
 
-    props.onFormSubmit(data);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // do something with name and email
+        const data = {name: name, email: email, id: generateId()};
 
-    console.log("name: ", name);
-    console.log("email: ", email);
-  };
+        props.onFormSubmit(data);
 
-  const handleClear = () => {
-    setName("");
-    setEmail("");
-  };
+        console.log("name: ", name);
+        console.log("email: ", email);
+    };
 
-  const classes = useStyles();
+    const handleClear = () => {
+        setName("");
+        setEmail("");
+    };
 
-  return (
-    <form onSubmit={handleSubmit} className={classes.root}>
-      <Box className={classes.fields}>
-        <Typography sx={{ mr: 2, display: "inline-block", width: "119px" }}>
-          Test
-        </Typography>
-        <TextField
-          value={name}
-          onChange={handleNameChange}
-          fullWidth
-          margin="normal"
-        />
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <Typography sx={{ mr: 2, display: "inline-block", width: "119px" }}>
-          Email
-        </Typography>
-        <TextField
-          // label="Email"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          fullWidth
-          margin="normal"
-        />
-      </Box>
-      <Box sx={{ marginTop: "103.88px" }}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          style={{ marginLeft: 24 }}
-        >
-          Submit
-        </Button>
-        <Button
-          type="button"
-          variant="contained"
-          color="secondary"
-          onClick={handleClear}
-          style={{ marginLeft: 33 }}
-        >
-          Clear
-        </Button>
-      </Box>
-    </form>
-  );
+    const classes = useStyles();
+
+    return (
+        <form onSubmit={handleSubmit} className={classes.root}>
+            <Box className={classes.fields}>
+                <Typography sx={{mr: 2, display: "inline-block", width: "119px"}}>
+                    Test
+                </Typography>
+                <TextField
+                    value={name}
+                    onChange={handleNameChange}
+                    fullWidth
+                    margin="normal"
+                />
+            </Box>
+            <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                <Typography sx={{mr: 2, display: "inline-block", width: "119px"}}>
+                    Email
+                </Typography>
+                <TextField
+                    // label="Email"
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    fullWidth
+                    margin="normal"
+                />
+            </Box>
+            <Box sx={{marginTop: "103.88px"}}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    style={{marginLeft: 24}}
+                >
+                    Submit
+                </Button>
+                <Button
+                    type="button"
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleClear}
+                    style={{marginLeft: 33}}
+                >
+                    Clear
+                </Button>
+            </Box>
+        </form>
+    );
 }
 
 export default UserInput;
