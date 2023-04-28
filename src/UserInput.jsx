@@ -60,7 +60,7 @@ function UserInput(props) {
 
         console.log("name: ", name);
         console.log("email: ", email);
-        // handleClear()
+        handleClear()
     };
 
     const handleClear = () => {
