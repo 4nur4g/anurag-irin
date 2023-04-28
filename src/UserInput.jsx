@@ -32,7 +32,7 @@ function UserInput(props) {
             setName(props.selectedEdit.name)
             setEmail(props.selectedEdit.email)
         }
-    },[props.selectedEdit])
+    }, [props.selectedEdit])
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -51,12 +51,16 @@ function UserInput(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         // do something with name and email
-        const data = {name: name, email: email, id: generateId()};
-
+        const data = !props.fromSelected ? {name: name, email: email, id: generateId()} : {
+            name: name,
+            email: email,
+            id: props.selectedEdit.id
+        }
         props.onFormSubmit(data);
 
         console.log("name: ", name);
         console.log("email: ", email);
+        // handleClear()
     };
 
     const handleClear = () => {
